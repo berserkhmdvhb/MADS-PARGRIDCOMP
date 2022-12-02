@@ -2,33 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <omp.h>
+
 #include "helpers.h"
-#include <time.h>
-#include <mpi.h>
-//#include <mpi.h>
 
 int main(int argc, char *argv[])
 {
-    int thread_id;
-    thread_id = omp_get_thread_num();
-    printf("Thread ID: %d\n", thread_id );
-    
-    // MPI
-    int process_Rank, size_Of_Cluster;
-    MPI_Status status;
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &process_Rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size_Of_Cluster);
-
-    printf("Hello World from process %d of %d\n", process_Rank, size_Of_Cluster);
-    MPI_Finalize();
-    // argv to nrows, ncols
-    //int ncols = atoi(argv[1]);
-    //int nrows = atoi(argv[2]);
-    //int omp_chunk_size = 100;
-    //int mpi_chunks = numnodes;
-    //int mpi_chunk_size = (ncols * nrows) / mpi_chunks;
 
     // Define allowable filters
     char *filters = "begra";
@@ -57,28 +35,24 @@ int main(int argc, char *argv[])
 
     // Remember filenames
     char *infile = argv[optind];
-    char *outfile = argv[optind + 1];	
+    char *outfile = argv[optind + 1];
 
+    // Open input file
+    FILE *inptr = fopen(infile, "r");
+    if (inptr == NULL)
+    {
+        fprintf(stderr, "Could not open %s.\n", infile);
+        return 4;
+    }
 
-//    if (process_Rank == 0)
-  //  {
-	    // Open input file
-	    FILE *inptr = fopen(infile, "r");
-	    if (inptr == NULL)
-	    {
-		fprintf(stderr, "Could not open %s.\n", infile);
-		return 4;
-	    }
-
-	    // Open output file
-	    FILE *outptr = fopen(outfile, "w");
-	    if (outptr == NULL)
-	    {
-		fclose(inptr);
-		fprintf(stderr, "Could not create %s.\n", outfile);
-		return 5;
-	    }
-//    }
+    // Open output file
+    FILE *outptr = fopen(outfile, "w");
+    if (outptr == NULL)
+    {
+        fclose(inptr);
+        fprintf(stderr, "Could not create %s.\n", outfile);
+        return 5;
+    }
 
     // Read infile's BITMAPFILEHEADER
     BITMAPFILEHEADER bf;
@@ -89,14 +63,14 @@ int main(int argc, char *argv[])
     fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
 
     // Ensure infile is (likely) a 24-bit uncompressed BMP 4.0
-  //  if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
-  //      bi.biBitCount != 24 || bi.biCompression != 0)
-  //  {
-  //      fclose(outptr);
-  //      fclose(inptr);
-  //      fprintf(stderr, "Unsupported f	ile format.\n");
-  //      return 6;
-  //  }
+    //if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
+    //    bi.biBitCount != 24 || bi.biCompression != 0)
+    //{
+    //    fclose(outptr);
+    //    fclose(inptr);
+    //    fprintf(stderr, "Unsupported file format.\n");
+    //    return 6;
+    //}
 
     int height = abs(bi.biHeight);
     int width = bi.biWidth;
@@ -125,9 +99,6 @@ int main(int argc, char *argv[])
     }
 
     // Filter image
-    // Calculate the time taken by fun()
-    clock_t t;
-    t = clock();
     switch (filter)
     {
         // Blur
@@ -149,7 +120,6 @@ int main(int argc, char *argv[])
         case 'r':
             reflect(height, width, image);
             break;
-            
         // All
         case 'a':      
             blur(height, width, image);
@@ -186,10 +156,6 @@ int main(int argc, char *argv[])
 
     // Close outfile
     fclose(outptr);
-    t = clock() - t;
-    
-    // Print the runtime
-    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("Edit function took %f seconds to execute \n", time_taken);
+
     return 0;
 }
