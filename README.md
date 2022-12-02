@@ -16,7 +16,7 @@ This repository is dedicated to the project of the course parallel and grid comp
 
 - greyscale on small image
 
-./filter -g images/yard.bmp output/out.bmp
+`./filter -g images/yard.bmp output/out.bmp`
 
 Edit function took 0.006757 seconds to execute 
 
