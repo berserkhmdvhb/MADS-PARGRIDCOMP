@@ -14,28 +14,29 @@ This repository is dedicated to the project of the course parallel and grid comp
 
 **Without Parallelization**
 
-./filter -g images/yard.bmp output/out.bmp
-Edit function took 0.011223 seconds to execute 
 
-./filter -g images/large.bmp output/out.bmp
-Edit function took 0.339627 seconds to execute 
-
-./filter -a images/yard.bmp output/out.bmp
-Edit function took 0.011352 seconds to execute 
-
-./filter -a images/large.bmp output/out.bmp
-Edit function took 0.395397 seconds to execute
 
 **With Parallelization**
 
+- greyscale on small image
+
 ./filteropmp -g images/yard.bmp output/out.bmp
 Thread ID: 0
-Edit function took 0.058368 seconds to execute 
+Edit function took 0.079441 seconds to execute 
+
+- greyscale on large image
 
 ./filteropmp -g images/large.bmp output/out.bmp
 Thread ID: 0
-Edit function took 0.595392 seconds to execute 
+Edit function took 0.590959 seconds to execute 
+
+- all filters on small image
 
 ./filteropmp -a images/yard.bmp output/out.bmp
 Thread ID: 0
-Edit function took 0.876835 seconds to execute 
+Edit function took 0.887377 seconds to execute 
+
+- all filters on large image
+./filteropmp -a images/large.bmp output/out.bmp
+Thread ID: 0
+Segmentation fault (core dumped)
