@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include <time.h>
 #include "helpers.h"
 
 int main(int argc, char *argv[])
@@ -97,7 +97,9 @@ int main(int argc, char *argv[])
         // Skip over padding
         fseek(inptr, padding, SEEK_CUR);
     }
-
+    // Calculate the time taken by fun()
+    clock_t t;
+    t = clock();
     // Filter image
     switch (filter)
     {
@@ -122,8 +124,8 @@ int main(int argc, char *argv[])
             break;
         // All
         case 'a':      
-            blur(height, width, image);
-            edges(height, width, image);
+            //blur(height, width, image);
+            //edges(height, width, image);
             grayscale(height, width, image);
             reflect(height, width, image);
             break;                 
@@ -156,6 +158,10 @@ int main(int argc, char *argv[])
 
     // Close outfile
     fclose(outptr);
-
+    
+    // Print the runtime
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("Edit function took %f seconds to execute \n", time_taken);
     return 0;
 }
