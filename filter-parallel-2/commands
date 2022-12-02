@@ -13,3 +13,4 @@ gcc -o filter filter.c helpers.c -lm -fopenmp
 
 mpicc -o filtermpi filter.c helpers.c -lm -fopenmp 
 ./filtermpi -a images/yard.bmp output/out.bmp
+./filtermpi -a images/large.bmp output/out.bmp

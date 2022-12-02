@@ -152,8 +152,8 @@ int main(int argc, char *argv[])
             
         // All
         case 'a':      
-            blur(height, width, image);
-            edges(height, width, image);
+            //blur(height, width, image);
+            //edges(height, width, image);
             grayscale(height, width, image);
             reflect(height, width, image);
             break;                 
