@@ -2,6 +2,9 @@ gcc -c filter.c
 gcc -c helpers.c
 
 gcc -o filter filter.c helpers.c -lm
-./filter -g images/yard.bmp output/out.bmp
 
+./filter -g images/yard.bmp output/out.bmp
+./filter -g images/large.bmp output/out.bmp
+
+./filter -a images/yard.bmp output/out.bmp
 ./filter -a images/large.bmp output/out.bmp

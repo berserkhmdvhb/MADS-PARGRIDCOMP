@@ -5,7 +5,6 @@
 #include <omp.h>
 #include "helpers.h"
 #include <time.h>
-#include <mpi.h>
 //#include <mpi.h>
 
 int main(int argc, char *argv[])
@@ -15,14 +14,14 @@ int main(int argc, char *argv[])
     printf("Thread ID: %d\n", thread_id );
     
     // MPI
-    int process_Rank, size_Of_Cluster;
-    MPI_Status status;
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &process_Rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size_Of_Cluster);
+    //int process_Rank, size_Of_Cluster;
+    //MPI_Status status;
+    //MPI_Init(&argc, &argv);
+    //MPI_Comm_rank(MPI_COMM_WORLD, &process_Rank);
+    //MPI_Comm_size(MPI_COMM_WORLD, &size_Of_Cluster);
 
-    printf("Hello World from process %d of %d\n", process_Rank, size_Of_Cluster);
-    MPI_Finalize();
+    //printf("Hello World from process %d of %d\n", process_Rank, size_Of_Cluster);
+    //MPI_Finalize();
     // argv to nrows, ncols
     //int ncols = atoi(argv[1]);
     //int nrows = atoi(argv[2]);
@@ -152,10 +151,10 @@ int main(int argc, char *argv[])
             
         // All
         case 'a':      
-            //blur(height, width, image);
+            blur(height, width, image);
             //edges(height, width, image);
-            grayscale(height, width, image);
-            reflect(height, width, image);
+            //grayscale(height, width, image);
+            //reflect(height, width, image);
             break;                 
     }
 
