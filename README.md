@@ -27,6 +27,7 @@ Edit function took 0.011352 seconds to execute
 Edit function took 0.395397 seconds to execute
 
 **With Parallelization**
+
 ./filteropmp -g images/yard.bmp output/out.bmp
 Thread ID: 0
 Edit function took 0.058368 seconds to execute 
