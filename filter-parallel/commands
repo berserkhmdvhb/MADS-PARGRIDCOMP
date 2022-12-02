@@ -1,0 +1,23 @@
+gcc -c filter.c
+gcc -c helpers.c
+
+gcc -o filter filter.c helpers.c -lm
+./filter -g images/yard.bmp output/out.bmp
+
+
+
+gcc -o test -fopenmp test.c
+
+
+
+mpicc -o filtermpi filter.c helpers.c -lm -fopenmp 
+./filtermpi -a images/yard.bmp output/out.bmp
+./filtermpi -a images/large.bmp output/out.bmp
+
+
+gcc -o filteropmp filter.c helpers.c -lm -fopenmp 
+./filteropmp -g images/yard.bmp output/out.bmp
+./filteropmp -g images/large.bmp output/out.bmp
+
+./filteropmp -a images/yard.bmp output/out.bmp
+./filteropmp -a images/large.bmp output/out.bmp
