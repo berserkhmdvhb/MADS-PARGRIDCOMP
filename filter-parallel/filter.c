@@ -9,6 +9,13 @@
 int main(int argc, char *argv[])
 {
 
+    int thread_id = omp_get_thread_num();
+    int max_no_thread = omp_get_max_threads();
+    printf("Thread ID: %d\n", thread_id);
+    printf("Maximum Nb of Threads: %d\n", max_no_thread);
+    //omp_set_num_threads(max_no_thread);
+    omp_set_num_threads(2);
+    
     // Define allowable filters
     char *filters = "begra";
 
@@ -88,10 +95,10 @@ int main(int argc, char *argv[])
 
     // Determine padding for scanlines
     int padding = (4 - (width * sizeof(RGBTRIPLE)) % 4) % 4;
-
-    #pragma omp parallel for default(shared)
+    int i;
+    #pragma omp parallel for default(shared) shared(padding) private(i)
     // Iterate over infile's scanlines
-    for (int i = 0; i < height; i++)
+    for (i = 0; i < height; i++)
     {
         // Read row into pixel array
         fread(image[i], sizeof(RGBTRIPLE), width, inptr);
@@ -139,15 +146,17 @@ int main(int argc, char *argv[])
     // Write outfile's BITMAPINFOHEADER
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
     
-    #pragma omp parallel for default(shared)
+    int ii;
+    int k;
+    #pragma omp parallel for default(shared) shared(padding) private(i,k)
     // Write new pixels to outfile
-    for (int i = 0; i < height; i++)
+    for (ii = 0; ii < height; ii++)
     {
         // Write row to outfile
-        fwrite(image[i], sizeof(RGBTRIPLE), width, outptr);
+        fwrite(image[ii], sizeof(RGBTRIPLE), width, outptr);
 
         // Write padding at end of row
-        for (int k = 0; k < padding; k++)
+        for (k = 0; k < padding; k++)
         {
             fputc(0x00, outptr);
         }

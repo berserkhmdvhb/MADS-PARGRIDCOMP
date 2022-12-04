@@ -5,12 +5,15 @@
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
+    int max_no_thread = omp_get_max_threads();
+    //omp_set_num_threads(max_no_thread);
+    omp_set_num_threads(2);
     //Check if all array elements are not equal
     //int n = 3;
     //while(--n>0 && a[n]==a[0]);
     //if (n!=0)
     int i,j;	
-    #pragma omp parallel for default(shared) private(i, j)
+    #pragma omp parallel for default(shared) private(i, j) collapse(2)
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width; j++)
@@ -25,6 +28,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
             //if (n != 0)
             int avg = round((float)(*b + *g + *r) / 3);
             *b = *g = *r = avg;
+            //printf("%d",avg);
         }
     }
 
