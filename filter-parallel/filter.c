@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     int max_no_thread = omp_get_max_threads();
     printf("Thread ID: %d\n", thread_id);
     printf("Maximum Nb of Threads: %d\n", max_no_thread);
-    //omp_set_num_threads(max_no_thread);
-    omp_set_num_threads(2);
+    omp_set_num_threads(max_no_thread);
+    //omp_set_num_threads(2);
     
     // Define allowable filters
     char *filters = "begra";
