@@ -6,8 +6,8 @@
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
     int max_no_thread = omp_get_max_threads();
-    //omp_set_num_threads(max_no_thread);
-    omp_set_num_threads(2);
+    omp_set_num_threads(max_no_thread);
+    //omp_set_num_threads(2);
     //Check if all array elements are not equal
     //int n = 3;
     //while(--n>0 && a[n]==a[0]);
