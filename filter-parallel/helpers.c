@@ -173,8 +173,8 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 //count = 9;
             }
 
-	    #pragma omp parallel for default(shared) collapse(2)
             int k = 0;
+            #pragma omp parallel for default(shared) collapse(2)
             for (int n = (-1 + MR1); n < (2 + MR2); n++)
             {
                 for (int m = (-1 + MC1); m < (2 + MC2); m++)
