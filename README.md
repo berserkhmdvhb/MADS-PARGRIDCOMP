@@ -10,7 +10,7 @@ ssh -p 8022 ekhaveh@access-iris.uni.lu
 
 si
 
-git clone git@github.com:berserkhmdvhb/PARGRIDCOMP.git
+git clone [git@github.com:berserkhmdvhb/PARGRIDCOMP.git](https://github.com/berserkhmdvhb/PARGRIDCOMP)
 
 cd PARGRIDCOMP/filter-parallel
 
