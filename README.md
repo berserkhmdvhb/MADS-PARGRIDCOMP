@@ -10,6 +10,8 @@ ssh -p 8022 ekhaveh@access-iris.uni.lu
 
 si
 
+git@github.com:berserkhmdvhb/PARGRIDCOMP.git
+
 cd PARGRIDCOMP/filter-parallel
 
 module purge
