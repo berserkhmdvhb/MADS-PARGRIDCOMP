@@ -8,7 +8,7 @@ In the following, the commands used in the HPC cluster is written:
 
 ssh -p 8022 ekhaveh@access-iris.uni.lu
 
-si
+si -N 1 --exclusive -t 01:00:00
 
 git clone [git@github.com:berserkhmdvhb/PARGRIDCOMP.git](https://github.com/berserkhmdvhb/PARGRIDCOMP)
 
