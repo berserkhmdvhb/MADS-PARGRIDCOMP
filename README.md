@@ -31,3 +31,34 @@ icc -o filterpar filter.c helpers.c -lm -qopenmp
 ./filterpar -g images/large.bmp output/out.bmp
 
 aps --collection-mode=all -r report ./filterpar -g images/large.bmp output/out.bmp
+
+---
+For APS:
+
+
+ssh -p 8022 ekhaveh@access-iris.uni.lu
+
+si -N 1 --exclusive -t 01:00:00
+
+git clone [https://github.com/berserkhmdvhb/PARGRIDCOMP](https://github.com/berserkhmdvhb/PARGRIDCOMP)
+
+cd PARGRIDCOMP/filter-parallel-2
+
+module purge
+
+module load mpi/OpenMPI/4.0.5-GCC-10.2.0
+
+module load tools/VTune/2020_update3
+
+module load toolchain/intel/2020b
+
+icc -qopenmp filter.c helpers.c -lm 
+
+aps --collection-mode=all -r report ./a.out
+
+aps-report -g report
+
+firefox report_<postfix>.html
+
+aps-report report_output
+
