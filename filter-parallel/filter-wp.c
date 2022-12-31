@@ -90,35 +90,9 @@ int main()
     clock_t t;
     t = clock();
     // Filter image
-    switch (filter)
-    {
-        // Blur
-        case 'b':
-            blur(height, width, image);
-            break;
 
-        // Edges
-        case 'e':
-            edges(height, width, image);
-            break;
+    grayscale(height, width, image);
 
-        // Grayscale
-        case 'g':
-            grayscale(height, width, image);
-            break;
-
-        // Reflect
-        case 'r':
-            reflect(height, width, image);
-            break;
-        // All
-        case 'a':      
-            //blur(height, width, image);
-            //edges(height, width, image);
-            grayscale(height, width, image);
-            reflect(height, width, image);
-            break;                 
-    }
 
     // Write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
