@@ -1,0 +1,30 @@
+gcc -o filter filter.c helpers.c -lm
+
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter$ ./filter -g images/yard.bmp output/out.bmp
+Edit function took 0.019264 seconds to execute 
+
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter$ ./filter -g images/large.bmp output/out.bmp
+Edit function took 0.333363 seconds to execute 
+
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter$ ./filter -a images/yard.bmp output/out.bmp
+Edit function took 0.012554 seconds to execute 
+
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter$ ./filter -a images/large.bmp output/out.bmp
+Edit function took 0.391483 seconds to execute 
+
+
+
+ADD PARALLEL FOR COLLAPSE (2) TO GREYSCALE:
+
+
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter-parallel$ ./filteropmp -g images/large.bmp output/out.bmp
+Edit function took 0.614594 seconds to execute
+
+
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter-parallel$ ./filteropmp -g images/large.bmp output/out.bmp
+Edit function took 0.611431 seconds to execute 
+
+
+ADD PARALLEL FOR TO GREYSCALE:
+~/Documents/UniLu/Courses/Semester3/PARGRIDCOMP/testing/filter-parallel$ ./filteropmp -g images/large.bmp output/out.bmp
+Edit function took 0.607508 seconds to execute 
