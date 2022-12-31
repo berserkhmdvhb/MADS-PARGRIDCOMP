@@ -29,7 +29,7 @@ int main()
 
     
     char *infile = "images/large.bmp";
-    char *outfile = "output/out-large-parallel.bmp"
+    char *outfile = "output/out-large-parallel.bmp";
 
     // Open input file
     FILE *inptr = fopen(infile, "r");
