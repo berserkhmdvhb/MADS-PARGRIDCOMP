@@ -20,7 +20,7 @@ int main()
     char *filters = "begra";
 
     // Get filter flag and check validity
-    char filter = "g";
+    char *filter = "g";
     if (filter == '?')
     {
         fprintf(stderr, "Invalid filter.\n");
