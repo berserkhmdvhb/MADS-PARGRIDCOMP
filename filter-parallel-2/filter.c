@@ -3,17 +3,17 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-//#include <omp.h>
+#include <omp.h>
 #include "helpers.h"
 
 int main()
 {
 
-    //int thread_id = omp_get_thread_num();
-    //int max_no_thread = omp_get_max_threads();
-    //printf("Thread ID: %d\n", thread_id);
-    //printf("Maximum Nb of Threads: %d\n", max_no_thread);
-    //omp_set_num_threads(max_no_thread);
+    int thread_id = omp_get_thread_num();
+    int max_no_thread = omp_get_max_threads();
+    printf("Thread ID: %d\n", thread_id);
+    printf("Maximum Nb of Threads: %d\n", max_no_thread);
+    omp_set_num_threads(max_no_thread);
     
  
     char *infile = "images/yard.bmp";
@@ -70,7 +70,7 @@ int main()
     // Determine padding for scanlines
     int padding = (4 - (width * sizeof(RGBTRIPLE)) % 4) % 4;
     int i;
-    //#pragma omp parallel for default(shared) shared(padding) private(i)
+    #pragma omp parallel for private(i)
     // Iterate over infile's scanlines
     for (i = 0; i < height; i++)
     {
@@ -96,7 +96,7 @@ int main()
     
     int ii;
     int k;
-    //#pragma omp parallel for default(shared) shared(padding) private(i,k)
+    #pragma omp parallel for default(shared) shared(padding) private(ii,k)
     // Write new pixels to outfile
     for (ii = 0; ii < height; ii++)
     {

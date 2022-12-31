@@ -1,19 +1,19 @@
 #include "helpers.h"
 #include <math.h>
 #include <stdio.h>
-//#include <omp.h>
+#include <omp.h>
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
-    //int max_no_thread = omp_get_max_threads();
-    //omp_set_num_threads(max_no_thread);
+    int max_no_thread = omp_get_max_threads();
+    omp_set_num_threads(max_no_thread);
     //omp_set_num_threads(2);
     //Check if all array elements are not equal
     //int n = 3;
     //while(--n>0 && a[n]==a[0]);
     //if (n!=0)
     int i,j;	
-    //#pragma omp parallel for default(shared) private(i, j) collapse(2)
+    #pragma omp parallel for default(shared) private(i, j) collapse(2)
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width; j++)
@@ -41,7 +41,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
     int k = 0;
     int i,j;
-    //#pragma omp parallel for default(shared) private(i, j) collapse(2)
+    #pragma omp parallel for default(shared) private(i, j) collapse(2)
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width / 2; j++)
@@ -59,7 +59,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     //create a duplicate (backup) of the image (so that values are not lost when changing)
     RGBTRIPLE imagedp[height][width];
-    //#pragma omp parallel for default(shared) collapse(2)
+    #pragma omp parallel for default(shared) collapse(2)
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -68,7 +68,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         }
     }
 		
-    //#pragma omp parallel for default(shared) collapse(2)	
+    #pragma omp parallel for default(shared) collapse(2)	
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -174,7 +174,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
 
             int k = 0;
-            //#pragma omp parallel for default(shared) collapse(2)
+            #pragma omp parallel for default(shared) collapse(2)
             for (int n = (-1 + MR1); n < (2 + MR2); n++)
             {
                 for (int m = (-1 + MC1); m < (2 + MC2); m++)
@@ -218,7 +218,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE imagedp[height][width];
-    //#pragma omp parallel for default(shared) collapse(2)
+    #pragma omp parallel for default(shared) collapse(2)
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -227,7 +227,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
         }
     }
 
-    //#pragma omp parallel for default(shared) collapse(2)
+    #pragma omp parallel for default(shared) collapse(2)
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -334,7 +334,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             int G_y[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
 
             int k = 0;
-            //#pragma omp parallel for default(shared) collapse(2)
+            #pragma omp parallel for default(shared) collapse(2)
             for (int n = (-1 + MR1); n < (2 + MR2); n++)
             {
                 for (int m = (-1 + MC1); m < (2 + MC2); m++)

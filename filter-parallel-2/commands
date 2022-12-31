@@ -1,16 +1,4 @@
-gcc -c filter.c
-gcc -c helpers.c
-
-gcc -o filter filter.c helpers.c -lm
-./filter -g images/yard.bmp output/out.bmp
-
-
-
-gcc filter.c helpers.c -fopenmp -lm
-
-gcc filter.c helpers.c -lm
-
-
+gcc filter.c helpers.c -lm -fopenmp
 
 ./a.out
 
