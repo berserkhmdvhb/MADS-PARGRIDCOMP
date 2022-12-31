@@ -59,4 +59,4 @@ aps --collection-mode=all -r report ./a.out
 aps-report -g report
 
 
-scp -r hvaheb@iris-cluster://home/users/hvaheb/PARGRIDCOMP/filter-parallel-2/report/ /home/hamed/Documents/report
+scp -r hvaheb@iris-cluster://home/users/hvaheb/PARGRIDCOMP/filter-parallel-2/report/ /home/hamed/Documents/report/
