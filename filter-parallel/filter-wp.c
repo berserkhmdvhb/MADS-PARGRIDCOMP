@@ -21,12 +21,6 @@ int main()
 
     // Get filter flag and check validity
     char *filter = "g";
-    if (filter == '?')
-    {
-        fprintf(stderr, "Invalid filter.\n");
-        return 1;
-    }
-
     
     char *infile = "images/large.bmp";
     char *outfile = "output/out-large-parallel.bmp";
