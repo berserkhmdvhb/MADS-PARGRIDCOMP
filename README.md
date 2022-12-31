@@ -58,7 +58,5 @@ aps --collection-mode=all -r report ./a.out
 
 aps-report -g report
 
-firefox report_<postfix>.html
-
-aps-report report_output
+scp -r hvaheb@iris-cluster://home/hamed/Documents/Luxembourg/Courses/Semester3/PARGRIDCOMP/filter-parallel-2/report/ /home/hamed/Documents/Luxembourg/Courses/Semester3/PARGRIDCOMP/filter-parallel-2/report/
 
