@@ -56,6 +56,8 @@ module load vis/GTK+/3.24.23-GCCcore-10.2.0
 
 icc -qopenmp filter.c helpers.c -lm 
 
+./a.out
+
 aps --collection-mode=all -r report ./a.out
 
 aps-report -g report
