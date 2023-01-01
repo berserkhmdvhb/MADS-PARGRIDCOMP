@@ -52,6 +52,8 @@ module load tools/VTune/2020_update3
 
 module load toolchain/intel/2020b
 
+module load vis/GTK+/3.24.23-GCCcore-10.2.0
+
 icc -qopenmp filter.c helpers.c -lm 
 
 aps --collection-mode=all -r report ./a.out
