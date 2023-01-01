@@ -60,5 +60,7 @@ aps --collection-mode=all -r report ./a.out
 
 aps-report -g report
 
+vtune -collect hotspots -r amplifier_result ./a.out
+
 
 scp -r hvaheb@iris-cluster://home/users/hvaheb/PARGRIDCOMP/filter-parallel-2/ /home/hamed/Documents/report/
