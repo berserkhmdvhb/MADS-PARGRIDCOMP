@@ -13,7 +13,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
     //while(--n>0 && a[n]==a[0]);
     //if (n!=0)
     int i,j;	
-    #pragma omp parallel for default(shared) private(i, j) collapse(2)
+    #pragma omp parallel for default(shared) private(i, j) collapse(2) schedule(static)
     for (i = 0; i < height; i++)
     {
         for (j = 0; j < width; j++)

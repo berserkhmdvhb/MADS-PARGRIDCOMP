@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
     // Determine padding for scanlines
     int padding = (4 - (width * sizeof(RGBTRIPLE)) % 4) % 4;
     int i;
-    #pragma omp parallel for default(shared) shared(padding) private(i)
+    //#pragma omp parallel for default(shared) shared(padding) private(i)
     // Iterate over infile's scanlines
     for (i = 0; i < height; i++)
     {
@@ -148,7 +148,8 @@ int main(int argc, char *argv[])
     
     int ii;
     int k;
-    #pragma omp parallel for default(shared) shared(padding) private(i,k)
+    
+    //#pragma omp parallel for shared(padding) private(ii,k) schedule(static)
     // Write new pixels to outfile
     for (ii = 0; ii < height; ii++)
     {
