@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
 #include <time.h>
 #include <omp.h>
 #include "helpers.h"
@@ -16,15 +15,15 @@ int main()
     printf("Maximum Nb of Threads: %d\n", max_no_thread);
     omp_set_num_threads(max_no_thread);
     
-     
-    char *infile = "images/yard.bmp";
-    char *outfile = "output/parallel-yard.bmp";
+    
+        // Define allowable filters
+    char *filters = "begra";
 
-    
-    //omp_set_num_threads(2);
-    
-    // Define allowable filters
+    // Get filter flag and check validity
     char *filter = "g";
+    
+    char *infile = "images/large.bmp";
+    char *outfile = "output/out-large-parallel.bmp";
 
     // Open input file
     FILE *inptr = fopen(infile, "r");
@@ -77,7 +76,7 @@ int main()
     // Determine padding for scanlines
     int padding = (4 - (width * sizeof(RGBTRIPLE)) % 4) % 4;
     int i;
-    //#pragma omp parallel for default(shared) shared(padding) private(i)
+    #pragma omp parallel for default(shared) shared(padding) private(i)
     // Iterate over infile's scanlines
     for (i = 0; i < height; i++)
     {
@@ -91,27 +90,9 @@ int main()
     clock_t t;
     t = clock();
     // Filter image
-    
-    // Grayscale
-    if (strcmp(filter, "g") == 0) 
-	{
-	  grayscale(height, width, image);
-	}
-	// Blur
-	else if (strcmp(filter, "b") == 0)
-	{
-	  blur(height, width, image);
-	} 
-	// Edges
-	else if (strcmp(filter, "e") == 0)
-	{
-	  edges(height, width, image);
-	}  
-	// Reflect
-	else if (strcmp(filter, "r") == 0)
-	{
-	  reflect(height, width, image);	    
-	}
+
+    grayscale(height, width, image);
+
 
     // Write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
@@ -121,8 +102,7 @@ int main()
     
     int ii;
     int k;
-    
-    //#pragma omp parallel for shared(padding) private(ii,k) schedule(static)
+    #pragma omp parallel for default(shared) shared(padding) private(i,k)
     // Write new pixels to outfile
     for (ii = 0; ii < height; ii++)
     {
