@@ -23,7 +23,7 @@ gcc -o filteropmp filter.c helpers.c -lm -fopenmp
 ./filteropmp -g images/large.bmp output/outpu.bmp
 
 ---
-*For APS*:
+**For APS**:
 
 
 ssh -p 8022 ekhaveh@access-iris.uni.lu
