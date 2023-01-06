@@ -18,22 +18,12 @@ module purge
 
 module load mpi/OpenMPI/4.0.5-GCC-10.2.0
 
-//module load swenv/default-env/latest
+gcc -o filteropmp filter.c helpers.c -lm -fopenmp 
 
-module load tools/VTune/2020_update3
-
-module load toolchain/intel/2020b
-
-
-icc -o filterpar filter.c helpers.c -lm -qopenmp
-
-
-./filterpar -g images/large.bmp output/out.bmp
-
-aps --collection-mode=all -r report ./filterpar -g images/large.bmp output/out.bmp
+./filteropmp -g images/large.bmp output/outpu.bmp
 
 ---
-For APS:
+*For APS*:
 
 
 ssh -p 8022 ekhaveh@access-iris.uni.lu
