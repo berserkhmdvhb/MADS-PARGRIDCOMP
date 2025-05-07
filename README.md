@@ -121,11 +121,3 @@ The project report detailing design choices, experiments, and results is availab
 
 This project is provided for academic use as part of the Parallel and Grid Computing course. Licensing terms can be adjusted based on future publication or collaboration needs.
 
----
-
-## Authors
-
-- **Hamed VAHEB**  – [GitHub](https://github.com/berserkhmdvhb)
-- **Elnaz KHAVEH** -[Github(https://github.com/berserkhmdvhb)
-
-Feel free to reach out for questions or collaborations.
