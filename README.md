@@ -125,6 +125,7 @@ This project is provided for academic use as part of the Parallel and Grid Compu
 
 ## Authors
 
-- **Ehsan Khaveh** – [GitHub](https://github.com/berserkhmdvhb)
+- **Hamed VAHEB**  – [GitHub](https://github.com/berserkhmdvhb)
+- **Elnaz KHAVEH** -[Github(https://github.com/berserkhmdvhb)
 
 Feel free to reach out for questions or collaborations.
